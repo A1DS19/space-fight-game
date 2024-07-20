@@ -1,1 +1,1 @@
-# Space fight game in C++ with custom graphics engine.
+# Space fight game in C++ with custom graphics/physics engine, also with a custom UI library.
