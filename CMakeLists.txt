@@ -9,9 +9,11 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-set(LIGHT_YEARS_GAME_NAME_TARGET LightYearsGame)
+set(LIGHT_YEARS_ENGINE_TARGET_NAME LightYearsEngine)
+set(LIGHT_YEARS_GAME_TARGET_NAME LightYearsGame)
 
-add_subdirectory(LightYears)
+add_subdirectory(LightYearsEngine)
+add_subdirectory(LightYearsGame)
 
 include(FetchContent)
 
@@ -24,4 +26,4 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(SFML)
 
-target_link_libraries(${LIGHT_YEARS_GAME_NAME_TARGET} PUBLIC sfml-graphics sfml-window sfml-system sfml-audio)
+target_link_libraries(${LIGHT_YEARS_ENGINE_TARGET_NAME} PUBLIC sfml-graphics sfml-window sfml-system sfml-audio)

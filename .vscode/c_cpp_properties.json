@@ -4,7 +4,9 @@
       "name": "linux-gcc-x64",
       "includePath": [
         "${workspaceFolder}/**",
-        "build/_deps/sfml-src/include"
+        "build/_deps/sfml-src/include",
+        "${workspaceFolder}/LightYearsEngine/**",
+        "${workspaceFolder}/LightYearsGame/**"
       ],
       "compilerPath": "/usr/bin/gcc",
       "cStandard": "${default}",
