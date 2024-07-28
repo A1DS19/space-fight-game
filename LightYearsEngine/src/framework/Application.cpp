@@ -4,9 +4,10 @@
 #include <iostream>
 
 namespace ly {
-Application::Application()
-    : mWindow{sf::VideoMode(1024, 1440), "Light Years"}, mTargetFrameTime{60.0},
-      mTickClock{} {}
+Application::Application(unsigned int windowWidth, unsigned int windowHeight,
+                         const std::string &windowTitle, sf::Uint32 style)
+    : mWindow{sf::VideoMode(windowWidth, windowHeight), windowTitle, style},
+      mTargetFrameTime{60.0}, mTickClock{} {}
 
 Application::~Application() { LOG("Application destroyed"); }
 
@@ -22,9 +23,9 @@ void Application::TickInternal(float deltaTime) {
 };
 
 void Application::Render() {
-  sf::RectangleShape rect(sf::Vector2f(100.f, 100.f));
-  rect.setFillColor(sf::Color::Red);
-  mWindow.draw(rect);
+  if (currentWorld) {
+    currentWorld->Render(mWindow);
+  }
 }
 
 void Application::RenderInternal() {

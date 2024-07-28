@@ -1,0 +1,11 @@
+#pragma once
+
+#include <string>
+
+std::string GetResourceDir() {
+#ifdef NDEBUG
+  return "assets/";
+#else
+  return "/home/dev/projects/space-fight-game/LightYearsGame/assets/";
+#endif
+}
