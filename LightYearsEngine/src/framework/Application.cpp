@@ -1,4 +1,5 @@
 #include "framework/Application.h"
+#include "framework/AssetManager.h"
 #include "framework/Core.h"
 #include "framework/World.h"
 #include <iostream>
@@ -7,7 +8,8 @@ namespace ly {
 Application::Application(unsigned int windowWidth, unsigned int windowHeight,
                          const std::string &windowTitle, sf::Uint32 style)
     : mWindow{sf::VideoMode(windowWidth, windowHeight), windowTitle, style},
-      mTargetFrameTime{60.0}, mTickClock{} {}
+      mTargetFrameTime{60.0}, mTickClock{}, mCleanCycleClock{},
+      mCleanCycleInterval{2.f} {}
 
 Application::~Application() { LOG("Application destroyed"); }
 
@@ -17,8 +19,12 @@ void Application::TickInternal(float deltaTime) {
   Tick(deltaTime);
 
   if (currentWorld) {
-    currentWorld->BeginPlayInternal();
     currentWorld->TickInternal(deltaTime);
+  }
+
+  if (mCleanCycleClock.getElapsedTime().asSeconds() >= mCleanCycleInterval) {
+    mCleanCycleClock.restart();
+    AssetManager::Get().CleanCycle();
   }
 };
 
