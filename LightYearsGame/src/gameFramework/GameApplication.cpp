@@ -17,6 +17,9 @@ GameApplication::GameApplication()
   actorToDestroy.lock()->SetTexture(
       GetResourceDir() + "SpaceShooterRedux/PNG/playerShip2_blue.png");
 
+  actorToDestroy.lock()->SetActorLocation(sf::Vector2f{300, 490});
+  actorToDestroy.lock()->SetActorRotation(90.f);
+
   counter = 0;
 }
 
