@@ -18,15 +18,13 @@ shared<sf::Texture> AssetManager::LoadTexture(const std::string &path) {
   }
 
   shared<sf::Texture> newTexture{new sf::Texture()};
-  if (newTexture->loadFromFile(path)) {
+  if (newTexture->loadFromFile(mRootDirectory + path)) {
     mLoadedTextures.insert({path, newTexture});
     return newTexture;
   }
 
   return shared<sf::Texture>{nullptr};
 }
-
-AssetManager::AssetManager() {}
 
 void AssetManager::CleanCycle() {
   for (auto it = mLoadedTextures.begin(); it != mLoadedTextures.end();) {
@@ -37,4 +35,10 @@ void AssetManager::CleanCycle() {
     }
   }
 }
+
+void AssetManager::SetAssetRootDirectory(const std::string &rootDirectory) {
+  mRootDirectory = rootDirectory;
+}
+
+AssetManager::AssetManager() : mRootDirectory{} {}
 } // namespace ly

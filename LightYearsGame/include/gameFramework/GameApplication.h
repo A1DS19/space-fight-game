@@ -1,11 +1,11 @@
 #pragma once
 #include <framework/Application.h>
 #include <framework/Core.h>
-#include <spaceship/Spaceship.h>
+#include <player/PlayerSpaceship.h>
 
 namespace ly {
 class Actor;
-class Spaceship;
+class PlayerSpaceship;
 class GameApplication : public Application {
 public:
   GameApplication();
@@ -13,6 +13,6 @@ public:
 
 private:
   float counter;
-  weak<Spaceship> player;
+  weak<PlayerSpaceship> player;
 };
 } // namespace ly

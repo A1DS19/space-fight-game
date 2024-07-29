@@ -32,6 +32,7 @@ void Actor::SetTexture(const std::string &texturePath) {
   AssetManager &assetManager = AssetManager::Get();
   mTexture = assetManager.LoadTexture(texturePath);
   if (!mTexture) {
+    LOG("Failed to load texture: %s", texturePath.c_str());
     return;
   }
   mSprite.setTexture(*mTexture);
