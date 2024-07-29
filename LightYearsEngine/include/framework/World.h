@@ -16,6 +16,8 @@ public:
 
   template <typename ActorType> weak<ActorType> SpawnActor();
 
+  sf::Vector2u GetWindowSize() const;
+
 private:
   void BeginPlay();
   void Tick(float deltaTime);

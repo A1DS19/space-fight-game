@@ -28,6 +28,8 @@ void Application::TickInternal(float deltaTime) {
   }
 };
 
+sf::Vector2u Application::GetWindowSize() const { return mWindow.getSize(); }
+
 void Application::Render() {
   if (currentWorld) {
     currentWorld->Render(mWindow);

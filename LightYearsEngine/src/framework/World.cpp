@@ -1,5 +1,6 @@
 #include "framework/World.h"
 #include "framework/Actor.h"
+#include "framework/Application.h"
 #include "framework/Core.h"
 
 namespace ly {
@@ -34,6 +35,10 @@ void World::TickInternal(float deltaTime) {
   }
 
   Tick(deltaTime);
+}
+
+sf::Vector2u World::GetWindowSize() const {
+  return mOwningApp->GetWindowSize();
 }
 
 void World::Render(sf::RenderWindow &window) {

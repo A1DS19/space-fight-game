@@ -18,5 +18,7 @@ private:
   sf::Vector2f mMoveInput;
   void ConsumeInput(float deltaTime);
   float mSpeed = 200.f;
+  void NormalizeInput();
+  void PreventOffScreenMovement();
 };
 } // namespace ly

@@ -2,6 +2,7 @@
 #include "framework/AssetManager.h"
 #include "framework/Core.h"
 #include "framework/MathUtils.h"
+#include "framework/World.h"
 
 namespace ly {
 Actor::Actor(World *owningWorld, const std::string &texturePath)
@@ -82,6 +83,10 @@ sf::Vector2f Actor::GetActorRightDirection() const {
 void Actor::CenterPivot() {
   sf::FloatRect bounds = mSprite.getLocalBounds();
   mSprite.setOrigin(bounds.width / 2.f, bounds.height / 2.f);
+}
+
+sf::Vector2u Actor::GetWindowSize() const {
+  return owningWorld->GetWindowSize();
 }
 
 }; // namespace ly
