@@ -9,6 +9,7 @@ public:
   void Tick(float deltaTime) override;
   void SetVelocity(const sf::Vector2f &newVelocity);
   sf::Vector2f GetVelocity() const;
+  virtual void Shoot();
 
 private:
   sf::Vector2f velocity;

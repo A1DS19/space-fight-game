@@ -27,7 +27,7 @@ void Actor::TickInternal(float deltaTime) {
 
 void Actor::BeginPlay() { LOG("Actor::BeginPlay"); }
 
-void Actor::Tick(float DeltaTime) { LOG("Actor::Tick"); }
+void Actor::Tick(float DeltaTime) {}
 
 void Actor::SetTexture(const std::string &texturePath) {
   AssetManager &assetManager = AssetManager::Get();

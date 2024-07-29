@@ -47,6 +47,6 @@ void World::Render(sf::RenderWindow &window) {
   }
 }
 
-void World::Tick(float deltaTime) { LOG("World::Tick at %f", 1.f / deltaTime); }
+void World::Tick(float deltaTime) {}
 
 } // namespace ly

@@ -1,8 +1,10 @@
 #pragma once
 #include "spaceship/Spaceship.h"
+#include "weapon/BulletShooter.h"
 #include <string>
 
 namespace ly {
+class BulletShooter;
 class PlayerSpaceship : public Spaceship {
 public:
   PlayerSpaceship(World *owningWorld,
@@ -12,6 +14,7 @@ public:
   virtual void Tick(float deltaTime) override;
   void SetSpeed(float speed) { mSpeed = speed; }
   float GetSpeed() const { return mSpeed; }
+  virtual void Shoot() override;
 
 private:
   void HandleInput();
@@ -20,5 +23,6 @@ private:
   float mSpeed = 200.f;
   void NormalizeInput();
   void PreventOffScreenMovement();
+  unique<BulletShooter> mBulletShooter;
 };
 } // namespace ly
