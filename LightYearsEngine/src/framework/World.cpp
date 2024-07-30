@@ -26,12 +26,8 @@ void World::TickInternal(float deltaTime) {
   mPendingActors.clear();
 
   for (auto iter = mActors.begin(); iter != mActors.end();) {
-    if (iter->get()->isPendingDestroy()) {
-      iter = mActors.erase(iter);
-    } else {
-      iter->get()->TickInternal(deltaTime);
-      ++iter;
-    }
+    iter->get()->TickInternal(deltaTime);
+    ++iter;
   }
 
   Tick(deltaTime);
@@ -48,5 +44,15 @@ void World::Render(sf::RenderWindow &window) {
 }
 
 void World::Tick(float deltaTime) {}
+
+void World::CleanCycle() {
+  for (auto iter = mActors.begin(); iter != mActors.end();) {
+    if (iter->get()->isPendingDestroy()) {
+      iter = mActors.erase(iter);
+    } else {
+      ++iter;
+    }
+  }
+}
 
 } // namespace ly

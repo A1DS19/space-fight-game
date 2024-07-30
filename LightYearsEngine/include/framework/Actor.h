@@ -35,6 +35,10 @@ public:
 
   World *GetWorld() const { return owningWorld; }
 
+  bool IsActorOutOfWindowBounds() const;
+
+  sf::FloatRect GetActorGlobalBounds() const;
+
 private:
   World *owningWorld;
   bool mHasBegunPlay;

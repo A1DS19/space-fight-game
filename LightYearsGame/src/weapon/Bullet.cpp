@@ -15,6 +15,10 @@ void Bullet::SetDamage(float damage) { mDamage = damage; }
 void Bullet::Tick(float deltaTime) {
   Actor::Tick(deltaTime);
   Move(deltaTime);
+
+  if (IsActorOutOfWindowBounds()) {
+    Destroy();
+  }
 }
 
 void Bullet::Move(float deltaTime) {
