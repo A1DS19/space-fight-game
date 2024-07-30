@@ -1,10 +1,10 @@
 #pragma once
 
 #include "framework/Core.h"
-#include "framework/Object.h"
 #include <functional>
 
 namespace ly {
+class Object;
 template <typename... Args> class Delegate {
 public:
   template <typename ClassName>

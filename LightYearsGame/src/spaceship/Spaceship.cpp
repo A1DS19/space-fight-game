@@ -23,11 +23,19 @@ void Spaceship::BeginPlay() {
   SetEnablePhysics(true);
   mHealthComponent.OnHealthChanged.BindAction(GetWeakRef(),
                                               &Spaceship::OnHealthChanged);
-  mHealthComponent.OnHealthChanged.Broadcast(11, 89, 100);
+  mHealthComponent.onTakenDamage.BindAction(GetWeakRef(),
+                                            &Spaceship::OnTakenDamage);
+  mHealthComponent.onTakenDamage.BindAction(GetWeakRef(), &Spaceship::Blow);
 }
 
-void Spaceship::OnHealthChanged(float amount, float health, float maxHealth) {
-  LOG("Health changed by: %f, and is now: %f/%f", amount, health, maxHealth);
+void Spaceship::OnHealthChanged(float amount, float health, float maxHealth) {}
+
+void Spaceship::ApplyDamage(float damage) {
+  mHealthComponent.ChangeHealth(-damage);
 }
+
+void Spaceship::OnTakenDamage(float amount, float health, float maxHealth) {}
+
+void Spaceship::Blow(float amount, float health, float maxHealth) { Destroy(); }
 
 } // namespace ly

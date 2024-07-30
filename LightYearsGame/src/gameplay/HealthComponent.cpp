@@ -28,19 +28,16 @@ void HealthComponent::ChangeHealth(float amount) {
     if (mHealth <= 0) {
       HealthEmpty();
     }
-  } else {
-    HealthRegen(amount);
   }
+
+  OnHealthChanged.Broadcast(amount, mHealth, mMaxHealth);
 }
 
 void HealthComponent::TakenDamage(float amount) {
-  LOG("Taken damage: %f", amount);
+  onTakenDamage.Broadcast(amount, mHealth, mMaxHealth);
 }
 
-void HealthComponent::HealthEmpty() { LOG("Health is empty"); }
-
-void HealthComponent::HealthRegen(float amount) {
-  LOG("Health regen: %f", amount);
-}
+void HealthComponent::HealthEmpty() { onHealthEmpty.Broadcast(); }
+void HealthComponent::HealthRegen(float amount) {}
 
 } // namespace ly

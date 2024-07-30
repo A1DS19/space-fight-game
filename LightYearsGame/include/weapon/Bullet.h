@@ -13,7 +13,10 @@ public:
   virtual void Tick(float deltaTime) override;
   virtual void BeginPlay() override;
 
+  float GetDamage() const { return mDamage; }
+
 private:
+  virtual void OnActorOverlap(Actor *otherActor) override;
   void Move(float deltaTime);
   Actor *mOwner;
   float mSpeed;

@@ -9,7 +9,8 @@
 namespace ly {
 Actor::Actor(World *owningWorld, const std::string &texturePath)
     : owningWorld(owningWorld), mHasBegunPlay{false}, mSprite{}, mTexture{},
-      mPhysicsBody{nullptr}, mEnablePhysics{false} {
+      mPhysicsBody{nullptr}, mEnablePhysics{false}, mTeamID{
+                                                        GetNeutralTeamID()} {
   SetTexture(texturePath);
 }
 
@@ -169,5 +170,16 @@ void Actor::Destroy() {
 
 void Actor::OnActorOverlap(Actor *actor) { LOG("Actor Overlap"); }
 void Actor::OnActorEndOverlap(Actor *actor) { LOG("Actor End Overlap"); }
+
+bool Actor::IsOtherHostile(Actor *other) const {
+  if (GetTeamId() == GetNeutralTeamID() ||
+      other->GetTeamId() == GetNeutralTeamID()) {
+    return false;
+  }
+
+  return GetTeamId() != other->GetTeamId();
+}
+
+void Actor::ApplyDamage(float damage) {}
 
 }; // namespace ly

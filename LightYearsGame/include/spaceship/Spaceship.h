@@ -12,10 +12,13 @@ public:
   sf::Vector2f GetVelocity() const;
   virtual void Shoot();
   virtual void BeginPlay() override;
+  virtual void ApplyDamage(float damage) override;
 
 private:
-  void OnHealthChanged(float amount, float health, float maxHealth);
+  virtual void OnHealthChanged(float amount, float health, float maxHealth);
+  virtual void OnTakenDamage(float amount, float health, float maxHealth);
+  virtual void Blow(float amount, float health, float maxHealth);
   sf::Vector2f velocity;
   HealthComponent mHealthComponent;
 };
-} // namespace ly
+}; // namespace ly

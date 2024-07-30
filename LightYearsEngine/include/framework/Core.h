@@ -27,4 +27,6 @@ using Dictionary = std::unordered_map<keyT, ValT, Hasher>;
 
 template <typename T> using Set = std::unordered_set<T>;
 
+using uint8 = unsigned char;
+
 } // namespace ly

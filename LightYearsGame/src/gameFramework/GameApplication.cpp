@@ -22,15 +22,16 @@ GameApplication::GameApplication()
   playerSpaceship.lock()->SetTexture(
       "SpaceShooterRedux/PNG/playerShip1_green.png");
   playerSpaceship.lock()->SetActorLocation(sf::Vector2f{100, 50});
+  playerSpaceship.lock()->SetTeamId(2);
   counter = 0;
 }
 
 void GameApplication::Tick(float deltaTime) {
   counter += deltaTime;
-  if (counter > 10.f) {
-    if (!player.expired()) {
-      player.lock()->Destroy();
-    }
-  }
+  // if (counter > 10.f) {
+  //   if (!player.expired()) {
+  //     player.lock()->Destroy();
+  //   }
+  // }
 }
 } // namespace ly
