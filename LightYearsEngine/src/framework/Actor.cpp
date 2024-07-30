@@ -162,6 +162,11 @@ void Actor::SetEnablePhysics(bool enablePhysics) {
   }
 }
 
+void Actor::Destroy() {
+  UnInitializePhysics();
+  Object::Destroy();
+}
+
 void Actor::OnActorOverlap(Actor *actor) { LOG("Actor Overlap"); }
 void Actor::OnActorEndOverlap(Actor *actor) { LOG("Actor End Overlap"); }
 

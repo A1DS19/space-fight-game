@@ -44,6 +44,7 @@ public:
 
   virtual void OnActorOverlap(Actor *actor);
   virtual void OnActorEndOverlap(Actor *actor);
+  virtual void Destroy() override;
 
 private:
   void InitializePhysics();

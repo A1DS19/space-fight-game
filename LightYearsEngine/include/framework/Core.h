@@ -4,6 +4,7 @@
 #include <memory>
 #include <stdio.h>
 #include <unordered_map>
+#include <unordered_set>
 #include <vector>
 
 namespace ly {
@@ -23,5 +24,7 @@ using Map = std::map<keyT, ValT, Pr>;
 
 template <typename keyT, typename ValT, typename Hasher = std::hash<keyT>>
 using Dictionary = std::unordered_map<keyT, ValT, Hasher>;
+
+template <typename T> using Set = std::unordered_set<T>;
 
 } // namespace ly

@@ -16,16 +16,19 @@ public:
   b2Body *AddListener(Actor *listener);
   void RemoveListener(b2Body *bodyToRemove);
   float GetPhysicsScale() const { return mPhysicsScale; }
+  static void CleanUp();
 
 protected:
   PhysicsSystem();
 
 private:
   static unique<PhysicsSystem> physicsSystem;
+  void ProcessPendingRemoveListeners();
   b2World mPhysicsWorld;
   float mPhysicsScale;
   int mVelocityIterations;
   int mPositionIterations;
   PhysicsContactListener mContactListener;
+  Set<b2Body *> mPendingRemovalListeners;
 };
 } // namespace ly

@@ -63,6 +63,7 @@ PhysicsSystem &PhysicsSystem::Get() {
 }
 
 void PhysicsSystem::Step(float deltaTime) {
+  ProcessPendingRemoveListeners();
   mPhysicsWorld.Step(deltaTime, mVelocityIterations, mPositionIterations);
 }
 
@@ -95,6 +96,19 @@ b2Body *PhysicsSystem::AddListener(Actor *listener) {
   return body;
 }
 
-void PhysicsSystem::RemoveListener(b2Body *bodyToRemove) {}
+void PhysicsSystem::RemoveListener(b2Body *bodyToRemove) {
+  mPendingRemovalListeners.insert(bodyToRemove);
+}
+
+void PhysicsSystem::ProcessPendingRemoveListeners() {
+  for (auto body : mPendingRemovalListeners) {
+    mPhysicsWorld.DestroyBody(body);
+  }
+  mPendingRemovalListeners.clear();
+}
+
+void PhysicsSystem::CleanUp() {
+  physicsSystem = std::move(unique<PhysicsSystem>{new PhysicsSystem});
+}
 
 } // namespace ly
