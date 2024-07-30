@@ -16,7 +16,6 @@ GameApplication::GameApplication()
   newWorld.lock()->SpawnActor<Actor>();
   player = newWorld.lock()->SpawnActor<PlayerSpaceship>();
   player.lock()->SetActorLocation(sf::Vector2f{300, 490});
-  counter = 0;
 }
 
 void GameApplication::Tick(float deltaTime) {}

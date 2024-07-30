@@ -8,7 +8,7 @@ namespace ly {
 PlayerSpaceship::PlayerSpaceship(World *owningWorld,
                                  const std::string &texturePath)
     : Spaceship(owningWorld, texturePath), mMoveInput{}, mSpeed{200.f},
-      mBulletShooter{new BulletShooter{this}} {}
+      mBulletShooter{new BulletShooter{this, 0.2f}} {}
 
 void PlayerSpaceship::Tick(float deltaTime) {
   Spaceship::Tick(deltaTime);

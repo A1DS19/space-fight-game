@@ -33,6 +33,8 @@ public:
 
   sf::Vector2u GetWindowSize() const;
 
+  World *GetWorld() const { return owningWorld; }
+
 private:
   World *owningWorld;
   bool mHasBegunPlay;
