@@ -1,5 +1,6 @@
 #pragma once
 #include "framework/Actor.h"
+#include "gameplay/HealthComponent.h"
 #include <string>
 
 namespace ly {
@@ -13,6 +14,8 @@ public:
   virtual void BeginPlay() override;
 
 private:
+  void OnHealthChanged(float amount, float health, float maxHealth);
   sf::Vector2f velocity;
+  HealthComponent mHealthComponent;
 };
 } // namespace ly
