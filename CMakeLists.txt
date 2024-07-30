@@ -14,16 +14,3 @@ set(LIGHT_YEARS_GAME_TARGET_NAME LightYearsGame)
 
 add_subdirectory(LightYearsEngine)
 add_subdirectory(LightYearsGame)
-
-include(FetchContent)
-
-FetchContent_Declare(
-    SFML
-    GIT_REPOSITORY https://github.com/SFML/SFML.git
-    GIT_TAG 2.5.1
-    GIT_SHALLOW FALSE
-)
-
-FetchContent_MakeAvailable(SFML)
-
-target_link_libraries(${LIGHT_YEARS_ENGINE_TARGET_NAME} PUBLIC sfml-graphics sfml-window sfml-system sfml-audio)
