@@ -2,6 +2,7 @@
 #include "SFML/Graphics.hpp"
 #include "framework/Core.h"
 #include "framework/Object.h"
+#include <box2d/b2_body.h>
 
 namespace ly {
 class World;
@@ -39,11 +40,21 @@ public:
 
   sf::FloatRect GetActorGlobalBounds() const;
 
+  void SetEnablePhysics(bool enablePhysics);
+
+  virtual void OnActorOverlap(Actor *actor);
+  virtual void OnActorEndOverlap(Actor *actor);
+
 private:
+  void InitializePhysics();
+  void UnInitializePhysics();
+  void UpdatePhysicsTransform();
   World *owningWorld;
   bool mHasBegunPlay;
   sf::Sprite mSprite;
   shared<sf::Texture> mTexture;
   void CenterPivot();
+  b2Body *mPhysicsBody;
+  bool mEnablePhysics;
 };
 }; // namespace ly

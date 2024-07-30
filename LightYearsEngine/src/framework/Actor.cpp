@@ -2,11 +2,14 @@
 #include "framework/AssetManager.h"
 #include "framework/Core.h"
 #include "framework/MathUtils.h"
+#include "framework/PhysicsSystem.h"
 #include "framework/World.h"
+#include <box2d/b2_body.h>
 
 namespace ly {
 Actor::Actor(World *owningWorld, const std::string &texturePath)
-    : owningWorld(owningWorld), mHasBegunPlay{false}, mSprite{}, mTexture{} {
+    : owningWorld(owningWorld), mHasBegunPlay{false}, mSprite{}, mTexture{},
+      mPhysicsBody{nullptr}, mEnablePhysics{false} {
   SetTexture(texturePath);
 }
 
@@ -25,7 +28,7 @@ void Actor::TickInternal(float deltaTime) {
   }
 }
 
-void Actor::BeginPlay() { LOG("Actor::BeginPlay"); }
+void Actor::BeginPlay() {}
 
 void Actor::Tick(float DeltaTime) {}
 
@@ -56,9 +59,13 @@ void Actor::Render(sf::RenderWindow &window) {
 
 void Actor::SetActorLocation(const sf::Vector2f &newLocation) {
   mSprite.setPosition(newLocation);
+  UpdatePhysicsTransform();
 }
 
-void Actor::SetActorRotation(float newRot) { mSprite.setRotation(newRot); }
+void Actor::SetActorRotation(float newRot) {
+  mSprite.setRotation(newRot);
+  UpdatePhysicsTransform();
+}
 
 void Actor::AddActorLocationOffset(const sf::Vector2f &offsetAmt) {
   SetActorLocation(GetActorLocation() + offsetAmt);
@@ -87,6 +94,17 @@ void Actor::CenterPivot() {
 
 sf::Vector2u Actor::GetWindowSize() const {
   return owningWorld->GetWindowSize();
+}
+
+void Actor::UpdatePhysicsTransform() {
+  if (mPhysicsBody) {
+    float physicsScale = PhysicsSystem::Get().GetPhysicsScale();
+    b2Vec2 pos{GetActorLocation().x * physicsScale,
+               GetActorLocation().y * physicsScale};
+    float rotation = DegreesToRadians(GetActorRotation());
+
+    mPhysicsBody->SetTransform(pos, rotation);
+  }
 }
 
 bool Actor::IsActorOutOfWindowBounds() const {
@@ -120,5 +138,31 @@ bool Actor::IsActorOutOfWindowBounds() const {
 sf::FloatRect Actor::GetActorGlobalBounds() const {
   return mSprite.getGlobalBounds();
 }
+
+void Actor::InitializePhysics() {
+  if (!mPhysicsBody) {
+    mPhysicsBody = PhysicsSystem::Get().AddListener(this);
+  }
+}
+
+void Actor::UnInitializePhysics() {
+  if (mPhysicsBody) {
+    PhysicsSystem::Get().RemoveListener(mPhysicsBody);
+    mPhysicsBody = nullptr;
+  }
+}
+
+void Actor::SetEnablePhysics(bool enablePhysics) {
+  mEnablePhysics = enablePhysics;
+
+  if (mEnablePhysics) {
+    InitializePhysics();
+  } else {
+    UnInitializePhysics();
+  }
+}
+
+void Actor::OnActorOverlap(Actor *actor) { LOG("Actor Overlap"); }
+void Actor::OnActorEndOverlap(Actor *actor) { LOG("Actor End Overlap"); }
 
 }; // namespace ly

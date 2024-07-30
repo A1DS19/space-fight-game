@@ -25,4 +25,9 @@ void Bullet::Move(float deltaTime) {
   AddActorLocationOffset(GetActorForwardDirection() * mSpeed * deltaTime);
 }
 
+void Bullet::BeginPlay() {
+  Actor::BeginPlay();
+  SetEnablePhysics(true);
+}
+
 } // namespace ly

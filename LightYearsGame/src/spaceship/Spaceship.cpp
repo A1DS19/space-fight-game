@@ -16,4 +16,9 @@ void Spaceship::Tick(float deltaTime) {
 }
 
 void Spaceship::Shoot() {}
+
+void Spaceship::BeginPlay() {
+  Actor::BeginPlay();
+  SetEnablePhysics(true);
+}
 } // namespace ly

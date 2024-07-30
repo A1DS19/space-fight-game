@@ -13,9 +13,15 @@ GameApplication::GameApplication()
                   sf::Style::Titlebar | sf::Style::Close} {
   AssetManager::Get().SetAssetRootDirectory(GetResourceDir());
   weak<World> newWorld = LoadWorld<World>();
+
   newWorld.lock()->SpawnActor<Actor>();
   player = newWorld.lock()->SpawnActor<PlayerSpaceship>();
   player.lock()->SetActorLocation(sf::Vector2f{300, 490});
+
+  weak<Spaceship> playerSpaceship = newWorld.lock()->SpawnActor<Spaceship>();
+  playerSpaceship.lock()->SetTexture(
+      "SpaceShooterRedux/PNG/playerShip1_green.png");
+  playerSpaceship.lock()->SetActorLocation(sf::Vector2f{100, 50});
 }
 
 void GameApplication::Tick(float deltaTime) {}
