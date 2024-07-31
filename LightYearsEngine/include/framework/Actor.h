@@ -34,7 +34,8 @@ public:
 
   sf::Vector2u GetWindowSize() const;
 
-  World *GetWorld() const { return owningWorld; }
+  World *GetWorld() { return owningWorld; }
+  const World *GetWorld() const { return owningWorld; }
 
   bool IsActorOutOfWindowBounds() const;
 
@@ -50,6 +51,9 @@ public:
   uint8 GetTeamId() const { return mTeamID; }
   void SetTeamId(uint8 teamID) { mTeamID = teamID; }
   virtual void ApplyDamage(float damage);
+
+  sf::Sprite &GetSprite() { return mSprite; }
+  const sf::Sprite &GetSprite() const { return mSprite; }
 
 private:
   void InitializePhysics();

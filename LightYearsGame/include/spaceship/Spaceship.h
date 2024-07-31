@@ -18,7 +18,12 @@ private:
   virtual void OnHealthChanged(float amount, float health, float maxHealth);
   virtual void OnTakenDamage(float amount, float health, float maxHealth);
   virtual void Blow(float amount, float health, float maxHealth);
+  void Blink();
+  void UpdateBlink(float deltaTime);
   sf::Vector2f velocity;
   HealthComponent mHealthComponent;
+  float mBlinkTime;
+  float mBlinkDuration;
+  sf::Color mBlinkColorOffset;
 };
 }; // namespace ly

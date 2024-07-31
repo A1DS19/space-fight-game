@@ -13,4 +13,34 @@ sf::Vector2f RotationToVector(float rotation) {
 float DegreesToRadians(float degrees) { return degrees * (PI / 180.f); }
 
 float RadiansToDegrees(float radians) { return radians * (180.f / PI); }
+
+float LerpFloat(float start, float end, float alpha) {
+  if (alpha > 1) {
+    alpha = 1;
+  }
+
+  if (alpha < 0) {
+    alpha = 0;
+  }
+
+  return start + (end - start) * alpha;
+}
+
+sf::Color LerpColor(const sf::Color &start, const sf::Color &end, float alpha) {
+
+  float r = LerpFloat(start.r, end.r, alpha);
+  float g = LerpFloat(start.g, end.g, alpha);
+  float b = LerpFloat(start.b, end.b, alpha);
+  float a = LerpFloat(start.a, end.a, alpha);
+
+  return sf::Color(r, g, b, a);
+}
+
+sf::Vector2f LerpFloat(const sf::Vector2f &start, const sf::Vector2f &end,
+                       float alpha) {
+  float x = LerpFloat(start.x, end.x, alpha);
+  float y = LerpFloat(start.y, end.y, alpha);
+
+  return sf::Vector2f(x, y);
+}
 } // namespace ly

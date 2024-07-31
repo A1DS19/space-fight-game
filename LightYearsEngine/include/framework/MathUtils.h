@@ -31,4 +31,9 @@ template <typename T> sf::Vector2<T> NormalizeVector(sf::Vector2<T> &vector) {
   ScaleVector(vector, 1.0 / length);
   return vector;
 }
+
+float LerpFloat(float start, float end, float alpha);
+sf::Vector2f LerpVector(const sf::Vector2f &start, const sf::Vector2f &end,
+                        float alpha);
+sf::Color LerpColor(const sf::Color &start, const sf::Color &end, float alpha);
 } // namespace ly
