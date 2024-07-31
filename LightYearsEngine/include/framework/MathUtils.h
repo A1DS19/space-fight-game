@@ -36,4 +36,8 @@ float LerpFloat(float start, float end, float alpha);
 sf::Vector2f LerpVector(const sf::Vector2f &start, const sf::Vector2f &end,
                         float alpha);
 sf::Color LerpColor(const sf::Color &start, const sf::Color &end, float alpha);
+
+float RandomRange(float min, float max);
+
+sf::Vector2f RandomUnitVector();
 } // namespace ly
