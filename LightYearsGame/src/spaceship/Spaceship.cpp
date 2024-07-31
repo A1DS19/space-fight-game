@@ -1,4 +1,5 @@
 #include "spaceship/Spaceship.h"
+#include "VFX/Explosion.h"
 #include "framework/Core.h"
 #include "framework/MathUtils.h"
 
@@ -42,7 +43,12 @@ void Spaceship::OnTakenDamage(float amount, float health, float maxHealth) {
   Blink();
 }
 
-void Spaceship::Blow(float amount, float health, float maxHealth) { Destroy(); }
+void Spaceship::Blow(float amount, float health, float maxHealth) {
+  Explosion *explosion = new Explosion();
+  explosion->SpawnExplosion(GetWorld(), GetActorLocation());
+  Destroy();
+  delete explosion;
+}
 
 void Spaceship::Blink() {
   if (mBlinkTime == 0) {

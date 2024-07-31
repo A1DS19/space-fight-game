@@ -61,4 +61,11 @@ sf::Vector2f RandomUnitVector() {
   return randVec;
 }
 
+sf::Vector2f LerpVector(const sf::Vector2f &a, const sf::Vector2f &b,
+                        float alpha) {
+  float lerpX = LerpFloat(a.x, b.x, alpha);
+  float lerpY = LerpFloat(a.y, b.y, alpha);
+  return sf::Vector2f(lerpX, lerpY);
+}
+
 } // namespace ly
