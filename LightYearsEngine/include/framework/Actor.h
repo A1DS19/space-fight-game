@@ -37,7 +37,7 @@ public:
   World *GetWorld() { return owningWorld; }
   const World *GetWorld() const { return owningWorld; }
 
-  bool IsActorOutOfWindowBounds() const;
+  bool IsActorOutOfWindowBounds(float allowance = 10.f) const;
 
   sf::FloatRect GetActorGlobalBounds() const;
 

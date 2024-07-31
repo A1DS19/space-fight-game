@@ -1,5 +1,6 @@
 #include "gameFramework/GameApplication.h"
 #include "config.h"
+#include "enemy/Vanguard.h"
 #include "framework/Actor.h"
 #include "framework/AssetManager.h"
 #include "framework/World.h"
@@ -18,11 +19,8 @@ GameApplication::GameApplication()
   player = newWorld.lock()->SpawnActor<PlayerSpaceship>();
   player.lock()->SetActorLocation(sf::Vector2f{300, 490});
 
-  weak<Spaceship> playerSpaceship = newWorld.lock()->SpawnActor<Spaceship>();
-  playerSpaceship.lock()->SetTexture(
-      "SpaceShooterRedux/PNG/playerShip1_green.png");
-  playerSpaceship.lock()->SetActorLocation(sf::Vector2f{100, 50});
-  playerSpaceship.lock()->SetTeamId(2);
+  weak<Vanguard> playerVanguard = newWorld.lock()->SpawnActor<Vanguard>();
+  playerVanguard.lock()->SetActorLocation(sf::Vector2f{100, 50});
   counter = 0;
 }
 

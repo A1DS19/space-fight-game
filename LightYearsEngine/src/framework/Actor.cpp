@@ -108,7 +108,7 @@ void Actor::UpdatePhysicsTransform() {
   }
 }
 
-bool Actor::IsActorOutOfWindowBounds() const {
+bool Actor::IsActorOutOfWindowBounds(float allowance) const {
   float windowWidth = GetWorld()->GetWindowSize().x;
   float windowHeight = GetWorld()->GetWindowSize().y;
 
@@ -117,19 +117,19 @@ bool Actor::IsActorOutOfWindowBounds() const {
 
   sf::Vector2f actorPosition = GetActorLocation();
 
-  if (actorPosition.x < -actorWidth) {
+  if (actorPosition.x < -actorWidth - allowance) {
     return true;
   }
 
-  if (actorPosition.x > windowWidth + actorWidth) {
+  if (actorPosition.x > windowWidth + actorWidth + allowance) {
     return true;
   }
 
-  if (actorPosition.y < -actorHeight) {
+  if (actorPosition.y < -actorHeight - allowance) {
     return true;
   }
 
-  if (actorPosition.y > windowHeight + actorHeight) {
+  if (actorPosition.y > windowHeight + actorHeight + allowance) {
     return true;
   }
 
@@ -172,6 +172,10 @@ void Actor::OnActorOverlap(Actor *actor) { LOG("Actor Overlap"); }
 void Actor::OnActorEndOverlap(Actor *actor) { LOG("Actor End Overlap"); }
 
 bool Actor::IsOtherHostile(Actor *other) const {
+  if (other == nullptr) {
+    return false;
+  }
+
   if (GetTeamId() == GetNeutralTeamID() ||
       other->GetTeamId() == GetNeutralTeamID()) {
     return false;
