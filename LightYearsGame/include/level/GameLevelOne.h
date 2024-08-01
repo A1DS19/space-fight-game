@@ -11,7 +11,6 @@ public:
 
 private:
   virtual void BeginPlay() override;
-  void TimerCallback();
   weak<PlayerSpaceship> player;
   TimerHandle timerHandle;
   virtual void InitGameStages() override;
