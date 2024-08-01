@@ -9,7 +9,7 @@ World::World(Application *owningApp)
 
 World::~World() {}
 
-void World::BeginPlay() { LOG("World::BeginPlay"); }
+void World::BeginPlay() {}
 
 void World::BeginPlayInternal() {
   if (!mBegunPlay) {

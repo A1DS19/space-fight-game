@@ -168,8 +168,8 @@ void Actor::Destroy() {
   Object::Destroy();
 }
 
-void Actor::OnActorOverlap(Actor *actor) { LOG("Actor Overlap"); }
-void Actor::OnActorEndOverlap(Actor *actor) { LOG("Actor End Overlap"); }
+void Actor::OnActorOverlap(Actor *actor) {}
+void Actor::OnActorEndOverlap(Actor *actor) {}
 
 bool Actor::IsOtherHostile(Actor *other) const {
   if (other == nullptr) {

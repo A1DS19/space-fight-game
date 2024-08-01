@@ -2,6 +2,7 @@
 #include "framework/AssetManager.h"
 #include "framework/Core.h"
 #include "framework/PhysicsSystem.h"
+#include "framework/TimerManager.h"
 #include "framework/World.h"
 #include <iostream>
 
@@ -12,7 +13,7 @@ Application::Application(unsigned int windowWidth, unsigned int windowHeight,
       mTargetFrameTime{60.0}, mTickClock{}, mCleanCycleClock{},
       mCleanCycleInterval{2.f} {}
 
-Application::~Application() { LOG("Application destroyed"); }
+Application::~Application() {}
 
 void Application::Tick(float deltaTime) {}
 
@@ -22,6 +23,8 @@ void Application::TickInternal(float deltaTime) {
   if (currentWorld) {
     currentWorld->TickInternal(deltaTime);
   }
+
+  TimerManager::Get().UpdateTimer(deltaTime);
 
   PhysicsSystem::Get().Step(deltaTime);
 
