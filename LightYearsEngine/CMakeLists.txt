@@ -34,6 +34,9 @@ add_library(${LIGHT_YEARS_ENGINE_TARGET_NAME} STATIC
 
   ${CMAKE_CURRENT_SOURCE_DIR}/include/framework/TimerManager.h
   ${CMAKE_CURRENT_SOURCE_DIR}/src/framework/TimerManager.cpp
+
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/gameplay/GameStage.h
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/gameplay/GameStage.cpp
 )
 
 target_include_directories(${LIGHT_YEARS_ENGINE_TARGET_NAME}

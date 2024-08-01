@@ -3,6 +3,7 @@
 #include "framework/Actor.h"
 #include "framework/AssetManager.h"
 #include "framework/Core.h"
+#include "gameplay/GameStage.h"
 #include "player/PlayerSpaceship.h"
 
 namespace ly {
@@ -19,7 +20,10 @@ void GameLevelOne::BeginPlay() {
 }
 
 void GameLevelOne::TimerCallback() {
-  LOG("Timer callback called!");
   TimerManager::Get().ClearTimer(timerHandle);
+}
+
+void GameLevelOne::InitGameStages() {
+  AddStage(shared<GameStage>{new GameStage{this}});
 }
 }; // namespace ly

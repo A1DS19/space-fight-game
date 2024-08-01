@@ -14,5 +14,6 @@ private:
   void TimerCallback();
   weak<PlayerSpaceship> player;
   TimerHandle timerHandle;
+  virtual void InitGameStages() override;
 };
 }; // namespace ly
