@@ -11,8 +11,8 @@ public:
 
 private:
   virtual void BeginPlay() override;
+  virtual void InitGameStages() override;
   weak<PlayerSpaceship> player;
   TimerHandle timerHandle;
-  virtual void InitGameStages() override;
 };
 }; // namespace ly

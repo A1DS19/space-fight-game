@@ -6,7 +6,7 @@ GameStage::GameStage(World *world) : mWorld{world}, mStageFinished{false} {}
 
 void GameStage::StartStage() { LOG("Starting stage"); }
 
-void GameStage::TickStage(float deltaTime) { LOG("Ticking stage"); }
+void GameStage::TickStage(float deltaTime) {}
 
 void GameStage::FinishStage() {
   OnStageFinished.Broadcast();

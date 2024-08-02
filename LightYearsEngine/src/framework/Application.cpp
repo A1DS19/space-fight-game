@@ -35,6 +35,11 @@ void Application::TickInternal(float deltaTime) {
       currentWorld->CleanCycle();
     }
   }
+
+  if (pendingWorld && pendingWorld != currentWorld) {
+    currentWorld = pendingWorld;
+    currentWorld->BeginPlayInternal();
+  }
 };
 
 sf::Vector2u Application::GetWindowSize() const { return mWindow.getSize(); }

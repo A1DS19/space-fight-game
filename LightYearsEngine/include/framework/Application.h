@@ -25,6 +25,7 @@ private:
   float mTargetFrameTime;
   sf::Clock mTickClock;
 
+  shared<World> pendingWorld;
   shared<World> currentWorld;
 
   sf::Clock mCleanCycleClock;
@@ -33,7 +34,7 @@ private:
 
 template <typename WorldType> weak<WorldType> Application::LoadWorld() {
   shared<WorldType> newWorld{new WorldType{this}};
-  currentWorld = newWorld;
+  pendingWorld = newWorld;
   return newWorld;
 }
 } // namespace ly
