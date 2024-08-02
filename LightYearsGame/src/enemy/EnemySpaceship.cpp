@@ -17,7 +17,7 @@ void EnemySpaceship::OnActorOverlap(Actor *other) {
 
 void EnemySpaceship::Tick(float deltaTime) {
   Spaceship::Tick(deltaTime);
-  if (IsActorOutOfWindowBounds(GetActorGlobalBounds().width)) {
+  if (IsActorOutOfWindowBounds(GetActorGlobalBounds().width * 2.f)) {
     Destroy();
   }
 }
