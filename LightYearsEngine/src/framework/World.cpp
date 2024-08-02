@@ -7,7 +7,7 @@
 namespace ly {
 World::World(Application *owningApp)
     : mOwningApp{owningApp}, mBegunPlay{false}, mActors{}, mPendingActors{},
-      mCurrentStageIndex{-1}, mGameStages{} {}
+      mCurrentStage{mGameStages.end()}, mGameStages{} {}
 
 World::~World() {}
 
@@ -18,11 +18,12 @@ void World::InitGameStages() {}
 void World::AllGameStagesFinished() {}
 
 void World::NextGameStage() {
-  ++mCurrentStageIndex;
-  if (mCurrentStageIndex >= 0 && mCurrentStageIndex < mGameStages.size()) {
-    mGameStages[mCurrentStageIndex]->OnStageFinished.BindAction(
-        GetWeakRef(), &World::NextGameStage);
-    mGameStages[mCurrentStageIndex]->StartStage();
+  mCurrentStage = mGameStages.erase(mCurrentStage);
+
+  if (mCurrentStage != mGameStages.end()) {
+    mCurrentStage->get()->StartStage();
+    mCurrentStage->get()->OnStageFinished.BindAction(GetWeakRef(),
+                                                     &World::NextGameStage);
   } else {
     AllGameStagesFinished();
   }
@@ -33,7 +34,7 @@ void World::BeginPlayInternal() {
     mBegunPlay = true;
     BeginPlay();
     InitGameStages();
-    NextGameStage();
+    StartStages();
   }
 }
 
@@ -53,8 +54,8 @@ void World::TickInternal(float deltaTime) {
     ++iter;
   }
 
-  if (mCurrentStageIndex >= 0 && mCurrentStageIndex < mGameStages.size()) {
-    mGameStages[mCurrentStageIndex]->TickStage(deltaTime);
+  if (mCurrentStage != mGameStages.end()) {
+    mCurrentStage->get()->TickStage(deltaTime);
   }
 
   Tick(deltaTime);
@@ -88,6 +89,13 @@ void World::CleanCycle() {
       ++iter;
     }
   }
+}
+
+void World::StartStages() {
+  mCurrentStage = mGameStages.begin();
+  mCurrentStage->get()->StartStage();
+  mCurrentStage->get()->OnStageFinished.BindAction(GetWeakRef(),
+                                                   &World::NextGameStage);
 }
 
 } // namespace ly

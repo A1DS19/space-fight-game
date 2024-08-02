@@ -6,6 +6,7 @@
 #include "framework/AssetManager.h"
 #include "framework/Core.h"
 #include "gameplay/GameStage.h"
+#include "gameplay/WaitStage.h"
 #include "player/PlayerSpaceship.h"
 
 namespace ly {
@@ -17,7 +18,9 @@ GameLevelOne::GameLevelOne(Application *app) : World(app) {
 void GameLevelOne::BeginPlay() {}
 
 void GameLevelOne::InitGameStages() {
+  AddStage(shared<WaitStage>{new WaitStage{this, 1.f}});
   AddStage(shared<VanguardStage>{new VanguardStage{this}});
+  AddStage(shared<WaitStage>{new WaitStage{this, 5.f}});
   AddStage(shared<TwinBladeStage>{new TwinBladeStage{this}});
 }
 }; // namespace ly
