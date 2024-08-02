@@ -1,5 +1,4 @@
 #include "enemy/VanguardStage.h"
-#include "enemy/TwinBlade.h"
 #include "enemy/Vanguard.h"
 #include "framework/World.h"
 #include "weapon/BulletShooter.h"
@@ -24,7 +23,7 @@ void VanguardStage::StageFinished() {
 }
 
 void VanguardStage::SpawnVanguard() {
-  weak<TwinBlade> newVanguard = GetWorld()->SpawnActor<TwinBlade>();
+  weak<Vanguard> newVanguard = GetWorld()->SpawnActor<Vanguard>();
   newVanguard.lock()->SetActorLocation(mSpawnLoc);
   ++mCurrentRowVanguardCount;
   if (mCurrentRowVanguardCount == mVanguardsPerRow) {

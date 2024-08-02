@@ -9,8 +9,8 @@ void GameStage::StartStage() { LOG("Starting stage"); }
 void GameStage::TickStage(float deltaTime) {}
 
 void GameStage::FinishStage() {
-  OnStageFinished.Broadcast();
   mStageFinished = true;
+  OnStageFinished.Broadcast();
   StageFinished();
 }
 
