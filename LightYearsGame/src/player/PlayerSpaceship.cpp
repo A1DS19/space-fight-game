@@ -8,7 +8,7 @@ namespace ly {
 PlayerSpaceship::PlayerSpaceship(World *owningWorld,
                                  const std::string &texturePath)
     : Spaceship(owningWorld, texturePath), mMoveInput{}, mSpeed{200.f},
-      mBulletShooter{new BulletShooter{this, 0.2f}} {
+      mBulletShooter{new BulletShooter{this, 0.2f, {50.f, 0.f}, -90.f}} {
   SetTeamId(1);
 }
 
